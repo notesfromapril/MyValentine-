@@ -47,12 +47,12 @@ button {
     position: absolute;
 }
 
-.heart {
+/* Floating animation */
+.float {
     position: fixed;
-    bottom: -20px;
-    font-size: 18px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.7;
+    bottom: -40px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.85;
 }
 
 @keyframes floatUp {
@@ -100,19 +100,28 @@ function moveNo() {
     }
 }
 
+/* Floating elements: hearts + couple emojis */
+let floatingItems = [
+"❤️",
+"💑",   // couple
+"💏",   // kiss
+"👫"    // holding hands
+];
+
 setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 10) + "px";
-    document.body.appendChild(heart);
+    let item = document.createElement("div");
+    item.className = "float";
+    item.innerText = floatingItems[Math.floor(Math.random() * floatingItems.length)];
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.fontSize = (Math.random() * 20 + 18) + "px";
+    document.body.appendChild(item);
 
     setTimeout(() => {
-        heart.remove();
-    }, 6000);
-}, 600);
+        item.remove();
+    }, 8000);
+}, 700);
 
+/* YES action */
 function yesClicked() {
     document.body.innerHTML = `
         <div style="margin-top:80px; padding:20px;">
@@ -124,6 +133,7 @@ function yesClicked() {
         </div>
     `;
 
+    // Confetti
     for (let i = 0; i < 120; i++) {
         let confetti = document.createElement("div");
         confetti.style.position = "fixed";
